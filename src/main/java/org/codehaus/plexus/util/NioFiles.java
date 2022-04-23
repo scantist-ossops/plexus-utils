@@ -30,7 +30,7 @@ import java.util.Set;
 /**
  * Encapsulates use of java7 features, exposing mostly backward compatible types
  */
-@SuppressWarnings("Since15")
+@Deprecated
 public class NioFiles {
     public static boolean isSymbolicLink(File file) {
         return Files.isSymbolicLink(file.toPath());
@@ -80,8 +80,9 @@ public class NioFiles {
     }
 
     public static long getLastModified(File file) throws IOException {
-        BasicFileAttributes basicFileAttributes = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
-        return basicFileAttributes.lastModifiedTime().toMillis();
+        return Files.readAttributes(file.toPath(), BasicFileAttributes.class)
+                .lastModifiedTime()
+                .toMillis();
     }
 
     /**
@@ -92,8 +93,7 @@ public class NioFiles {
      * @throws java.io.IOException io issue
      */
     public static File readSymbolicLink(File symlink) throws IOException {
-        Path path = Files.readSymbolicLink(symlink.toPath());
-        return path.toFile();
+        return Files.readSymbolicLink(symlink.toPath()).toFile();
     }
 
     public static File createSymbolicLink(File symlink, File target) throws IOException {
@@ -101,8 +101,7 @@ public class NioFiles {
         if (Files.exists(link, LinkOption.NOFOLLOW_LINKS)) {
             Files.delete(link);
         }
-        link = Files.createSymbolicLink(link, target.toPath());
-        return link.toFile();
+        return Files.createSymbolicLink(link, target.toPath()).toFile();
     }
 
     public static boolean deleteIfExists(File file) throws IOException {

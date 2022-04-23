@@ -56,6 +56,7 @@ package org.codehaus.plexus.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -584,7 +585,7 @@ public class DirectoryScanner extends AbstractScanner {
      * @since Ant 1.5
      */
     public boolean isSymbolicLink(File parent, String name) throws IOException {
-        return NioFiles.isSymbolicLink(new File(parent, name));
+        return Files.isSymbolicLink(new File(parent, name).toPath());
     }
 
     /**
@@ -600,6 +601,6 @@ public class DirectoryScanner extends AbstractScanner {
      * @since Ant 1.5
      */
     public boolean isParentSymbolicLink(File parent, String name) throws IOException {
-        return NioFiles.isSymbolicLink(parent);
+        return Files.isSymbolicLink(parent.toPath());
     }
 }
