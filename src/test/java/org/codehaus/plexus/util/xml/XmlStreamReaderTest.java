@@ -21,9 +21,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.SequenceInputStream;
 
-import junit.framework.ComparisonFailure;
-import junit.framework.TestCase;
 import org.codehaus.plexus.util.IOUtil;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * <p>XmlStreamReaderTest class.</p>
@@ -32,7 +34,7 @@ import org.codehaus.plexus.util.IOUtil;
  * @version $Id: $Id
  * @since 3.4.0
  */
-public class XmlStreamReaderTest extends TestCase {
+class XmlStreamReaderTest {
     /** french */
     private static final String TEXT_LATIN1 = "eacute: \u00E9";
 
@@ -111,7 +113,8 @@ public class XmlStreamReaderTest extends TestCase {
      *
      * @throws java.io.IOException if any.
      */
-    public void testNoXmlHeader() throws IOException {
+    @Test
+    void noXmlHeader() throws IOException {
         String xml = "<text>text with no XML header</text>";
         checkXmlContent(xml, "UTF-8");
         checkXmlContent(xml, "UTF-8", BOM_UTF8);
@@ -122,7 +125,8 @@ public class XmlStreamReaderTest extends TestCase {
      *
      * @throws java.io.IOException if any.
      */
-    public void testDefaultEncoding() throws IOException {
+    @Test
+    void defaultEncoding() throws IOException {
         checkXmlStreamReader(TEXT_UNICODE, null, "UTF-8");
         checkXmlStreamReader(TEXT_UNICODE, null, "UTF-8", BOM_UTF8);
     }
@@ -132,7 +136,8 @@ public class XmlStreamReaderTest extends TestCase {
      *
      * @throws java.io.IOException if any.
      */
-    public void testUTF8Encoding() throws IOException {
+    @Test
+    void uTF8Encoding() throws IOException {
         checkXmlStreamReader(TEXT_UNICODE, "UTF-8");
         checkXmlStreamReader(TEXT_UNICODE, "UTF-8", BOM_UTF8);
     }
@@ -142,7 +147,8 @@ public class XmlStreamReaderTest extends TestCase {
      *
      * @throws java.io.IOException if any.
      */
-    public void testUTF16Encoding() throws IOException {
+    @Test
+    void uTF16Encoding() throws IOException {
         checkXmlStreamReader(TEXT_UNICODE, "UTF-16", "UTF-16BE", null);
         checkXmlStreamReader(TEXT_UNICODE, "UTF-16", "UTF-16LE", BOM_UTF16LE);
         checkXmlStreamReader(TEXT_UNICODE, "UTF-16", "UTF-16BE", BOM_UTF16BE);
@@ -153,7 +159,8 @@ public class XmlStreamReaderTest extends TestCase {
      *
      * @throws java.io.IOException if any.
      */
-    public void testUTF16BEEncoding() throws IOException {
+    @Test
+    void uTF16BEEncoding() throws IOException {
         checkXmlStreamReader(TEXT_UNICODE, "UTF-16BE");
     }
 
@@ -162,7 +169,8 @@ public class XmlStreamReaderTest extends TestCase {
      *
      * @throws java.io.IOException if any.
      */
-    public void testUTF16LEEncoding() throws IOException {
+    @Test
+    void uTF16LEEncoding() throws IOException {
         checkXmlStreamReader(TEXT_UNICODE, "UTF-16LE");
     }
 
@@ -171,7 +179,8 @@ public class XmlStreamReaderTest extends TestCase {
      *
      * @throws java.io.IOException if any.
      */
-    public void testLatin1Encoding() throws IOException {
+    @Test
+    void latin1Encoding() throws IOException {
         checkXmlStreamReader(TEXT_LATIN1, "ISO-8859-1");
     }
 
@@ -180,7 +189,8 @@ public class XmlStreamReaderTest extends TestCase {
      *
      * @throws java.io.IOException if any.
      */
-    public void testLatin7Encoding() throws IOException {
+    @Test
+    void latin7Encoding() throws IOException {
         checkXmlStreamReader(TEXT_LATIN7, "ISO-8859-7");
     }
 
@@ -189,7 +199,8 @@ public class XmlStreamReaderTest extends TestCase {
      *
      * @throws java.io.IOException if any.
      */
-    public void testLatin15Encoding() throws IOException {
+    @Test
+    void latin15Encoding() throws IOException {
         checkXmlStreamReader(TEXT_LATIN15, "ISO-8859-15");
     }
 
@@ -198,7 +209,8 @@ public class XmlStreamReaderTest extends TestCase {
      *
      * @throws java.io.IOException if any.
      */
-    public void testEUC_JPEncoding() throws IOException {
+    @Test
+    void eUC_JPEncoding() throws IOException {
         checkXmlStreamReader(TEXT_EUC_JP, "EUC-JP");
     }
 
@@ -207,7 +219,8 @@ public class XmlStreamReaderTest extends TestCase {
      *
      * @throws java.io.IOException if any.
      */
-    public void testEBCDICEncoding() throws IOException {
+    @Test
+    void eBCDICEncoding() throws IOException {
         checkXmlStreamReader("simple text in EBCDIC", "CP1047");
     }
 
@@ -216,11 +229,12 @@ public class XmlStreamReaderTest extends TestCase {
      *
      * @throws java.io.IOException if any.
      */
-    public void testInappropriateEncoding() throws IOException {
+    @Test
+    void inappropriateEncoding() throws IOException {
         try {
             checkXmlStreamReader(TEXT_UNICODE, "ISO-8859-2");
             fail("Check should have failed, since some characters are not available in the specified encoding");
-        } catch (ComparisonFailure cf) {
+        } catch (AssertionError cf) {
             // expected failure, since the encoding does not contain some characters
         }
     }
@@ -230,7 +244,8 @@ public class XmlStreamReaderTest extends TestCase {
      *
      * @throws java.io.IOException if any.
      */
-    public void testEncodingAttribute() throws IOException {
+    @Test
+    void encodingAttribute() throws IOException {
         String xml = "<?xml version='1.0' encoding='US-ASCII'?><element encoding='attribute value'/>";
         checkXmlContent(xml, "US-ASCII");
 

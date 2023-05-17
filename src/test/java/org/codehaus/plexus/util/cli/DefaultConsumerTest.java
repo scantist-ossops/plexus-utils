@@ -16,7 +16,7 @@ package org.codehaus.plexus.util.cli;
  * limitations under the License.
  */
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * <p>DefaultConsumerTest class.</p>
@@ -25,14 +25,14 @@ import org.junit.Test;
  * @version $Id: $Id
  * @since 3.4.0
  */
-public class DefaultConsumerTest {
+class DefaultConsumerTest {
     /**
      * <p>testConsumeLine.</p>
      *
      * @throws java.lang.Exception if any.
      */
     @Test
-    public void testConsumeLine() throws Exception {
+    void consumeLine() throws Exception {
         DefaultConsumer cons = new DefaultConsumer();
         cons.consumeLine("Test DefaultConsumer consumeLine");
     }

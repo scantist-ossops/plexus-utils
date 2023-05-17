@@ -16,10 +16,10 @@ package org.codehaus.plexus.util;
  * limitations under the License.
  */
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * <p>MatchPatternsTest class.</p>
@@ -28,14 +28,14 @@ import static org.junit.Assert.assertTrue;
  * @version $Id: $Id
  * @since 3.4.0
  */
-public class MatchPatternsTest {
+class MatchPatternsTest {
     /**
      * <p>testMatches.</p>
      *
      * @throws java.lang.Exception if any.
      */
     @Test
-    public void testMatches() throws Exception {
+    void matches() throws Exception {
         MatchPatterns from = MatchPatterns.from("ABC**", "CDE**");
         assertTrue(from.matches("ABCDE", true));
         assertTrue(from.matches("CDEF", true));

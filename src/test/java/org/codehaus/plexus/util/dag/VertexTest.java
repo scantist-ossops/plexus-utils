@@ -16,9 +16,9 @@ package org.codehaus.plexus.util.dag;
  * limitations under the License.
  */
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * <p>VertexTest class.</p>
@@ -27,12 +27,12 @@ import static org.junit.Assert.assertEquals;
  * @version $Id: $Id
  * @since 3.4.0
  */
-public class VertexTest {
+class VertexTest {
     /**
      * <p>testVertex.</p>
      */
     @Test
-    public void testVertex() {
+    void vertex() {
 
         final Vertex vertex1 = new Vertex("a");
 

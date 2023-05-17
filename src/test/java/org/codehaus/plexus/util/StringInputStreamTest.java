@@ -16,7 +16,7 @@ package org.codehaus.plexus.util;
  * limitations under the License.
  */
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
 /**
  * <p>StringInputStreamTest class.</p>
@@ -25,9 +25,10 @@ import junit.framework.TestCase;
  * @version $Id: $Id
  * @since 3.4.0
  */
-public class StringInputStreamTest extends TestCase {
+class StringInputStreamTest {
     /**
      * <p>testFoo.</p>
      */
-    public void testFoo() {}
+    @Test
+    void foo() {}
 }

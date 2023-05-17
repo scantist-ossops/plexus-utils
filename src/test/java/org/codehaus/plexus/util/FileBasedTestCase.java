@@ -28,9 +28,10 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.util.Arrays;
 
-import junit.framework.AssertionFailedError;
+import org.opentest4j.AssertionFailedError;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Base class for testcases doing tests with files.
@@ -160,7 +161,7 @@ public abstract class FileBasedTestCase {
      * @throws java.lang.Exception if any.
      */
     protected void checkFile(final File file, final File referenceFile) throws Exception {
-        assertTrue("Check existence of output file", file.exists());
+        assertTrue(file.exists(), "Check existence of output file");
         assertEqualContent(referenceFile, file);
     }
 
@@ -202,7 +203,7 @@ public abstract class FileBasedTestCase {
      */
     protected void deleteFile(final File file) throws Exception {
         if (file.exists()) {
-            assertTrue("Couldn't delete file: " + file, file.delete());
+            assertTrue(file.delete(), "Couldn't delete file: " + file);
         }
     }
 
@@ -230,11 +231,11 @@ public abstract class FileBasedTestCase {
                     n0 = is0.read(buf0);
                     n1 = is1.read(buf1);
                     assertTrue(
+                            (n0 == n1),
                             "The files " + f0 + " and " + f1 + " have differing number of bytes available (" + n0
-                                    + " vs " + n1 + ")",
-                            (n0 == n1));
+                                    + " vs " + n1 + ")");
 
-                    assertTrue("The files " + f0 + " and " + f1 + " have different content", Arrays.equals(buf0, buf1));
+                    assertTrue(Arrays.equals(buf0, buf1), "The files " + f0 + " and " + f1 + " have different content");
                 }
             } finally {
                 is1.close();
@@ -256,10 +257,10 @@ public abstract class FileBasedTestCase {
         try {
             byte[] b1 = new byte[b0.length];
             int numRead = is.read(b1);
-            assertTrue("Different number of bytes", numRead == b0.length && is.available() == 0);
+            assertTrue(numRead == b0.length && is.available() == 0, "Different number of bytes");
             for (int i = 0;
                     i < numRead;
-                    assertTrue("Byte " + i + " differs (" + b0[i] + " != " + b1[i] + ")", b0[i] == b1[i]), i++)
+                    assertEquals(b0[i], b1[i], "Byte " + i + " differs (" + b0[i] + " != " + b1[i] + ")"), i++)
                 ;
         } finally {
             is.close();
@@ -272,9 +273,9 @@ public abstract class FileBasedTestCase {
      * @param file a {@link java.io.File} object.
      */
     protected void assertIsDirectory(File file) {
-        assertTrue("The File doesn't exists: " + file.getAbsolutePath(), file.exists());
+        assertTrue(file.exists(), "The File doesn't exists: " + file.getAbsolutePath());
 
-        assertTrue("The File isn't a directory: " + file.getAbsolutePath(), file.isDirectory());
+        assertTrue(file.isDirectory(), "The File isn't a directory: " + file.getAbsolutePath());
     }
 
     /**
@@ -283,8 +284,8 @@ public abstract class FileBasedTestCase {
      * @param file a {@link java.io.File} object.
      */
     protected void assertIsFile(File file) {
-        assertTrue("The File doesn't exists: " + file.getAbsolutePath(), file.exists());
+        assertTrue(file.exists(), "The File doesn't exists: " + file.getAbsolutePath());
 
-        assertTrue("The File isn't a file: " + file.getAbsolutePath(), file.isFile());
+        assertTrue(file.isFile(), "The File isn't a file: " + file.getAbsolutePath());
     }
 }

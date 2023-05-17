@@ -18,10 +18,10 @@ package org.codehaus.plexus.util;
 
 import java.io.File;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * <p>SelectorUtilsTest class.</p>
@@ -29,12 +29,12 @@ import static org.junit.Assert.assertTrue;
  * @author herve
  * @since 3.4.0
  */
-public class SelectorUtilsTest {
+class SelectorUtilsTest {
     /**
      * <p>testMatchPath_DefaultFileSeparator.</p>
      */
     @Test
-    public void testMatchPath_DefaultFileSeparator() {
+    void matchPath_DefaultFileSeparator() {
         String separator = File.separator;
 
         // Pattern and target start with file separator
@@ -52,7 +52,7 @@ public class SelectorUtilsTest {
      * <p>testMatchPath_UnixFileSeparator.</p>
      */
     @Test
-    public void testMatchPath_UnixFileSeparator() {
+    void matchPath_UnixFileSeparator() {
         String separator = "/";
 
         // Pattern and target start with file separator
@@ -72,7 +72,7 @@ public class SelectorUtilsTest {
      * <p>testMatchPath_WindowsFileSeparator.</p>
      */
     @Test
-    public void testMatchPath_WindowsFileSeparator() {
+    void matchPath_WindowsFileSeparator() {
         String separator = "\\";
 
         // Pattern and target start with file separator
@@ -89,29 +89,29 @@ public class SelectorUtilsTest {
     }
 
     @Test
-    public void testPatternMatchSingleWildcardPosix() {
+    void patternMatchSingleWildcardPosix() {
         assertFalse(SelectorUtils.matchPath("/com/test/*", "/com/test/test/hallo"));
     }
 
     @Test
-    public void testPatternMatchDoubleWildcardCaseInsensitivePosix() {
+    void patternMatchDoubleWildcardCaseInsensitivePosix() {
         assertTrue(SelectorUtils.matchPath("/com/test/**", "/com/test/test/hallo"));
     }
 
     @Test
-    public void testPatternMatchDoubleWildcardPosix() {
+    void patternMatchDoubleWildcardPosix() {
         assertTrue(SelectorUtils.matchPath("/com/test/**", "/com/test/test/hallo"));
     }
 
     @Test
-    public void testPatternMatchSingleWildcardWindows() {
+    void patternMatchSingleWildcardWindows() {
         assertFalse(SelectorUtils.matchPath("D:\\com\\test\\*", "D:\\com\\test\\test\\hallo"));
 
         assertFalse(SelectorUtils.matchPath("D:/com/test/*", "D:/com/test/test/hallo"));
     }
 
     @Test
-    public void testPatternMatchDoubleWildcardWindows() {
+    void patternMatchDoubleWildcardWindows() {
         assertTrue(SelectorUtils.matchPath("D:\\com\\test\\**", "D:\\com\\test\\test\\hallo"));
 
         assertTrue(SelectorUtils.matchPath("D:\\com\\test\\**", "D:/com/test/test/hallo"));
