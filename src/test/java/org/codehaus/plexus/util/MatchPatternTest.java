@@ -16,10 +16,10 @@ package org.codehaus.plexus.util;
  * limitations under the License.
  */
 
+import org.junit.Test;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
 
 /**
  * <p>MatchPatternTest class.</p>
@@ -28,19 +28,16 @@ import org.junit.Test;
  * @version $Id: $Id
  * @since 3.4.0
  */
-public class MatchPatternTest
-{
+public class MatchPatternTest {
     /**
      * <p>testMatchPath.</p>
      *
      * @throws java.lang.Exception if any.
      */
     @Test
-    public void testMatchPath()
-        throws Exception
-    {
-        MatchPattern mp = MatchPattern.fromString( "ABC*" );
-        assertTrue( mp.matchPath( "ABCD", true ) );
+    public void testMatchPath() throws Exception {
+        MatchPattern mp = MatchPattern.fromString("ABC*");
+        assertTrue(mp.matchPath("ABCD", true));
     }
 
     /**
@@ -49,18 +46,16 @@ public class MatchPatternTest
      * @see <a href="https://github.com/codehaus-plexus/plexus-utils/issues/63">Issue #63</a>
      */
     @Test
-    public void testMatchPatternStart()
-    {
-        MatchPattern mp = MatchPattern.fromString( "ABC*" );
+    public void testMatchPatternStart() {
+        MatchPattern mp = MatchPattern.fromString("ABC*");
 
-        assertTrue( mp.matchPatternStart( "ABCD", true ) );
-        assertFalse( mp.matchPatternStart( "AbCD", true ) );
+        assertTrue(mp.matchPatternStart("ABCD", true));
+        assertFalse(mp.matchPatternStart("AbCD", true));
 
-        assertTrue( mp.matchPatternStart( "ABCD", false ) );
-        assertTrue( mp.matchPatternStart( "AbCD", false ) );
+        assertTrue(mp.matchPatternStart("ABCD", false));
+        assertTrue(mp.matchPatternStart("AbCD", false));
 
-        assertFalse( mp.matchPatternStart( "XXXX", true ) );
-        assertFalse( mp.matchPatternStart( "XXXX", false ) );
+        assertFalse(mp.matchPatternStart("XXXX", true));
+        assertFalse(mp.matchPatternStart("XXXX", false));
     }
-
 }
